@@ -1,0 +1,250 @@
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+:root {
+    --cell-size: 80px;
+    --mark-size: calc(var(--cell-size)* .9);
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+.board {
+    width: fit-content;
+    height: fit-content;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: repeat(3, auto);
+}
+
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.cell.x,
+.cell.o {
+    cursor: not-allowed;
+}
+
+
+
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+    border-top: none;
+}
+
+.cell:nth-child(3n+1) {
+    border-left: none;
+}
+.cell:nth-child(3n+3) {
+    border-right: none;
+}
+.cell:last-child,
+.cell:nth-child(7),
+.cell:nth-child(8) {
+    border-bottom: none;
+}
+
+.cell.x::after,
+.cell.x::before,
+.cell.o::after,
+.cell.o::before {
+    background-color: black;
+}
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after {
+    content: '';
+    position: absolute;
+    width: calc(var(--mark-size)* .15);
+    height: var(--mark-size);
+  
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::after {
+    transform: rotate(-45deg);
+}
+.cell.x::before,
+.board.x .cell:not(.x):not(.o):hover::before {
+    transform: rotate(45deg);
+}
+
+
+.cell.o::after,
+.cell.o::before,
+.board.o .cell:not(.x):not(.o):hover::before,
+.board.o .cell:not(.x):not(.o):hover::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+}
+
+.cell.o::before,
+.board.o .cell:not(.x):not(.o):hover::before {
+    width: var(--mark-size);
+    height: var(--mark-size);
+    
+}
+
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::after {
+    width: calc(var(--mark-size) * .7);
+    height: calc(var(--mark-size) * .7);
+    background-color: white;
+}
+
+.board.x .cell:not(.x):not(.o):hover::after,
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.o .cell:not(.x):not(.o):hover::before {
+    background-color: lightgray;
+}
+
+
+.winning-message {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .9);
+    
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 4rem;
+    flex-direction: column;
+}
+
+.winning-message button {
+    font-size: 2rem;
+    background-color: white;
+    border: 1px solid black;
+    padding: .25em .5em;
+    cursor: pointer;
+    border-radius: 10px;
+
+}
+
+.winning-message button:hover {
+    background-color: black;
+    color: white;
+    border-color: white;
+}
+
+.winning-message.show {
+    display: flex;
+}
+
+
+.showTurn {
+    font-size: 25px;
+    text-align: center;
+}
+
+#btn {
+    padding: 10px 25px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    height: fit-content;
+}
+
+.head {
+    font-weight: bold;
+    font-size: 30px;
+    
+}
+
+.msg1 {
+    border: 1px solid grey;
+    padding: 15px 25px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+    position: relative;
+    background-color: grey;
+    color: white;
+}
+
+.msg1::before {
+    content: '';
+    border: 10px solid transparent;
+    border-left-color: grey;
+    position: absolute;
+    top: 8px;
+    right: -22px;
+}
+
+.msgbox1 {
+    position: absolute;
+    top: 50px;
+    right: 70%;
+}
+
+
+
+
+
+
+
+
+.msg2 {
+    border: 1px solid grey;
+    padding: 15px 25px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+    position: relative;
+    background-color: grey;
+    color: white;
+}
+
+.msg2::before {
+    content: '';
+    border: 10px solid transparent;
+    border-right-color: grey;
+    position: absolute;
+    top: 9px;
+    left: -22px;
+}
+
+.msgbox2 {
+    position: absolute;
+    top: 140px;
+    right: 15%;
+}
+input {
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-top: 0px solid transparent;
+    border-left: 0px solid transparent;
+    border-right: 0px solid transparent;
+    padding: 10px 20px;
+}
+
+label {
+    background-color: rgba(128, 128, 128, 0.5);
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+    
+    
